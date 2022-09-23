@@ -9,7 +9,6 @@ import {
   serverTimestamp,
   orderBy,
   query,
-  where,
 } from "firebase/firestore";
 import FlipMove from "react-flip-move";
 // import * as firebase from "firebase";
@@ -60,29 +59,27 @@ function App() {
     setUsername(inputUser);
   };
 
-  const ref = collection(db, "messages");
-  console.log(ref);
+  async function getMessages() {
+    // console.log("iughguhadsuih");
+    const messageCol = collection(db, "messages");
+    // const order = messageCol.orderBy("timestamp", "desc");
+    const q = query(messageCol, orderBy("timestamp", "desc"));
+    const messagesSnapshot = await getDocs(q);
+    const messageData = messagesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }));
+    console.log("messageData", messageData);
+    // const order = messagesSnapshot.orderBy("timestamp", "desc");
+    setMessages([...messageData]);
+  }
 
   useEffect(() => {
-    async function getMessages() {
-      // console.log("iughguhadsuih");
-      const messageCol = collection(db, "messages");
-      // const order = messageCol.orderBy("timestamp", "desc");
-      const q = query(messageCol, orderBy("timestamp", "desc"));
-      const messagesSnapshot = await getDocs(q);
-      const messageData = messagesSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }));
-      console.log("messageData", messageData);
-      // const order = messagesSnapshot.orderBy("timestamp", "desc");
-      setMessages(messageData);
-    }
-
+    console.log("asdasd");
     getMessages();
   }, [messages]);
 
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <div className="message-Wrapper">
@@ -100,6 +97,9 @@ function App() {
       {username && (
         <>
           <h1>Messanger</h1>
+          <h3 style={{ textAlign: "center", textTransform: "capitalize" }}>
+            Welcome {username}
+          </h3>
           <form className="message-input">
             <input
               value={inputValue}
@@ -119,7 +119,12 @@ function App() {
                     isUser === data?.username ? "user" : "guest"
                   }`}
                 >
-                  <div className="name">{data?.username}</div>
+                  {/* {isUser === data?.username ? (
+                    <div className="name">{data?.username}</div>
+                  ) : (
+                    ""
+                  )}
+                   */}
                   <div className="text">{data?.message}</div>
                 </div>
               ))}
