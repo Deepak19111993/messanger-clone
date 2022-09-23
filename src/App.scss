@@ -1,0 +1,116 @@
+.message-Wrapper {
+  // max-width: 600px;
+  // width: 100%;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .uerinputform {
+    padding-top: 100px;
+    input {
+      flex: 1;
+    }
+    button {
+      flex: 0;
+    }
+  }
+  .message-input {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+    background: #fff;
+    padding: 10px;
+    input {
+      // padding-left: 10px;
+    }
+    button {
+      height: 40px;
+      padding: 0 20px;
+    }
+  }
+  form {
+    display: flex;
+    align-items: center;
+    input {
+      font-size: 15px;
+      flex: 1;
+      height: 40px;
+      border: none;
+      border-bottom: 1px solid #000;
+      outline: none;
+    }
+    button {
+      flex: 0;
+      outline: none;
+      border: none;
+      padding: 0 15px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: #000;
+      font-size: 15px;
+      margin-left: 20px;
+      cursor: pointer !important;
+    }
+  }
+  .message-block {
+    padding: 30px 5px 65px 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 20vh;
+    max-height: 78vh;
+    overflow: auto;
+    .text-wrapper {
+      width: 100%;
+      margin-bottom: 10px;
+      .name {
+        color: #a3a3a3;
+        font-size: 14px;
+        margin-bottom: 5px;
+        text-transform: capitalize;
+      }
+      .text {
+        background: #ccc;
+        color: #000;
+        padding: 10px 10px;
+        font-size: 15px;
+        border-radius: 3px;
+        min-width: 0;
+        max-width: 500px;
+        width: fit-content;
+        word-break: break-word;
+      }
+      &.user {
+        float: right;
+        .name {
+          text-align: right;
+        }
+        .text {
+          background: #4763f7;
+          color: #fff;
+          margin-left: auto;
+        }
+      }
+      &.guest {
+        float: left;
+        .name {
+          text-align: left;
+        }
+        .text {
+          background: #ccc;
+          color: #000;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}
